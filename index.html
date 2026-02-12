@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For You ❤️</title>
+  <meta name="description" content="A little page I made just for you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0f0f14;
+      --card: #1b1b24cc;
+      --accent: #ff4d6d;
+      --accent-2:#f7a3b8;
+      --text: #f7f7fb;
+      --muted:#c7c7d1;
+      --glow: 0 0 60px #ff4d6daa;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100svh; display:grid; place-items:center; background:
+        radial-gradient(60rem 60rem at 10% -10%, #381827, transparent 60%),
+        radial-gradient(70rem 60rem at 110% 10%, #181f38, transparent 60%),
+        linear-gradient(180deg, #0b0b12, #131320 60%, #0e0e16);
+      color:var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow:hidden;
+    }
+    .stars{position:fixed; inset:0; pointer-events:none; background-image:
+      radial-gradient(2px 2px at 20% 30%, #ffffffaa 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 70% 10%, #ffffff99 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 40% 80%, #ffffff66 50%, transparent 51%),
+      radial-gradient(2px 2px at 90% 60%, #ffffff88 50%, transparent 51%);
+      animation: twinkle 6s infinite alternate ease-in-out;
+      opacity:.5;
+    }
+    @keyframes twinkle{from{filter:brightness(1)} to{filter:brightness(1.7)}}
+
+    .container{position:relative; width:min(880px, 92vw); margin:auto; padding:28px}
+    .card{
+      backdrop-filter: blur(10px) saturate(120%);
+      background: var(--card);
+      border: 1px solid #ffffff18;
+      border-radius: 22px;
+      padding: clamp(22px, 4vw, 40px);
+      box-shadow: 0 20px 60px #0008, inset 0 0 0 1px #ffffff10;
+    }
+
+    .heading{
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(42px, 9vw, 88px);
+      line-height: 1.05; margin: 0 0 8px; text-align:center;
+      color: var(--text);
+      text-shadow: 0 10px 30px #0009, 0 0 18px #ff4d6d33;
+    }
+    .sub{font-size: clamp(14px, 2.2vw, 18px); color: var(--muted); text-align:center; margin:0 0 22px}
+
+    .heart-wrap{display:grid; place-items:center; margin: 8px 0 22px}
+    .heart{
+      width: 140px; height: 140px; position:relative; transform: rotate(-45deg);
+      animation: pulse 1.6s infinite ease-in-out; filter: drop-shadow(0 0 24px #ff4d6d66);
+    }
+    .heart::before, .heart::after{
+      content:""; position:absolute; width:140px; height:140px; background: linear-gradient(135deg, var(--accent), #ff7e99);
+      border-radius: 50%;
+    }
+    .heart::before{ top:-70px; left:0 }
+    .heart::after{ top:0; left:70px }
+    @keyframes pulse{
+      0%,100%{ transform: rotate(-45deg) scale(1)}
+      50%{ transform: rotate(-45deg) scale(1.08)}
+    }
+
+    .message{font-size: clamp(18px, 2.6vw, 22px); line-height:1.6; text-align:center; margin:0 auto 26px; max-width: 52ch}
+    .signature{font-family:'Great Vibes', cursive; font-size: clamp(28px, 5vw, 40px); text-align:center; color: var(--accent-2)}
+
+    .cta{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top: 18px}
+    .btn{
+      --c: var(--accent);
+      appearance:none; border:none; padding: 14px 22px; border-radius: 14px; cursor:pointer;
+      color:white; background: linear-gradient(180deg, var(--c), #e23a5a);
+      box-shadow: 0 10px 30px #0006, inset 0 0 0 1px #ffffff20; font-weight:700; letter-spacing:.2px;
+      transition: transform .14s ease, filter .14s ease;
+    }
+    .btn:hover{ transform: translateY(-2px); filter: brightness(1.05)}
+    .btn.secondary{ --c:#454459; background: linear-gradient(180deg, #3a3a4e, #2b2b3a); color:#f0f0f7 }
+
+    .hidden{display:none}
+    .confetti{position:fixed; inset:0; pointer-events:none}
+    footer{margin-top:24px; text-align:center; color:#a3a3b3; font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <canvas class="confetti" id="confetti"></canvas>
+
+  <div class="container">
+    <div class="card">
+      <h1 class="heading" id="headline">Will you be my Valentine?</h1>
+      <p class="sub" id="subtitle">I made this little page just for you. ✨</p>
+
+      <div class="heart-wrap">
+        <div class="heart" aria-hidden="true"></div>
+      </div>
+
+      <p class="message" id="message">
+        Every day with you feels brighter than the last. I love your laugh, your kindness, and the way you make
+        the ordinary feel magical. So here I am—shooting my shot. Will you be my Valentine?
+      </p>
+      <p class="signature" id="signature">— From <span id="fromName">Me</span></p>
+
+      <div class="cta">
+        <button class="btn" id="yesBtn">Yes! 💞</button>
+        <button class="btn secondary" id="maybeBtn">Hmm… maybe 🙈</button>
+      </div>
+
+      <footer id="footer">(Tip: Add <code>?to=Name&from=YourName</code> to the link ✍️)</footer>
+    </div>
+  </div>
+
+  <script>
+    // Personalize via URL parameters: ?to=Name&from=YourName&msg=Custom%20message
+    const params = new URLSearchParams(location.search);
+    const to = params.get('to');
+    const from = params.get('from');
+    const msg = params.get('msg');
+    if(to){
+      document.getElementById('headline').textContent = `${to}, will you be my Valentine?`;
+      document.getElementById('subtitle').textContent = `This is just for you, ${to}.`;
+    }
+    if(from){ document.getElementById('fromName').textContent = from; }
+    if(msg){ document.getElementById('message').textContent = msg; }
+
+    // Confetti celebration on "Yes"
+    const cvs = document.getElementById('confetti');
+    const ctx = cvs.getContext('2d');
+    let W, H, pieces=[]; const COLORS=['#ff4d6d','#ffd166','#06d6a0','#4cc9f0','#f72585'];
+    const resize = ()=>{ W = cvs.width = innerWidth; H = cvs.height = innerHeight; };
+    addEventListener('resize', resize); resize();
+    function addConfetti(n=180){
+      for(let i=0;i<n;i++){
+        pieces.push({
+          x: Math.random()*W,
+          y: -20 - Math.random()*H,
+          s: 6+Math.random()*10,
+          c: COLORS[Math.floor(Math.random()*COLORS.length)],
+          r: Math.random()*Math.PI,
+          v: 2+Math.random()*4,
+          w: (Math.random()*2-1)*0.08
+        });
+      }
+    }
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      pieces.forEach(p=>{
+        p.y += p.v; p.r += p.w; p.x += Math.sin(p.r)*0.6;
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.r);
+        ctx.fillStyle = p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s);
+        ctx.restore();
+      });
+      pieces = pieces.filter(p=> p.y < H+40);
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    const yesBtn = document.getElementById('yesBtn');
+    const maybeBtn = document.getElementById('maybeBtn');
+
+    yesBtn.addEventListener('click', ()=>{
+      addConfetti(260);
+      yesBtn.textContent = 'Yay! 🥰';
+      maybeBtn.classList.add('hidden');
+      document.getElementById('message').textContent = `You just made my day. Can’t wait to celebrate with you!`;
+      document.getElementById('footer').textContent = '🎉 See you soon!';
+    });
+
+    // Playful chase for Maybe button
+    let evade=0;
+    maybeBtn.addEventListener('mouseenter', ()=>{
+      evade++;
+      const dx = (Math.random()*2-1) * (80 + Math.min(220, evade*18));
+      const dy = (Math.random()*2-1) * (40 + Math.min(120, evade*12));
+      maybeBtn.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+  </script>
+</body>
+</html>
